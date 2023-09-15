@@ -35,18 +35,24 @@ public class FragViewModelHome extends BaseViewModel {
     }
 
     public void loadData() {
-        observeBanner.add(new ModelHome(R.drawable.shoes_2, "$25.99", "React Presto"));
-        observeBanner.add(new ModelHome(R.drawable.shoes_8, "$19.99", "Nike Downshifter 11"));
-        observeBanner.add(new ModelHome(R.drawable.shoes_6, "$29.99", "Nike Flex"));
+        observeBanner.add(new ModelHome(R.drawable.shoes_2, 25.99, "React Presto"));
+        observeBanner.add(new ModelHome(R.drawable.shoes_8, 19.99, "Nike Downshifter 11"));
+        observeBanner.add(new ModelHome(R.drawable.shoes_6, 29.99, "Nike Flex"));
 
-        observeData.add(new ModelHome(R.drawable.shoes_1, "$25.99", "React Presto"));
-        observeData.add(new ModelHome(R.drawable.shoes_5, "$20.99", "Air Max 97"));
-        observeData.add(new ModelHome(R.drawable.shoes_4, "$23.99", "React Presto"));
-        observeData.add(new ModelHome(R.drawable.shoes_3, "$23.99", "React Presto"));
-        observeData.add(new ModelHome(R.drawable.shoes_6, "$29.99", "Nike Flex"));
-        observeData.add(new ModelHome(R.drawable.shoes_7, "$25.99", "Nike Legend"));
-        observeData.add(new ModelHome(R.drawable.shoes_8, "$19.99", "Nike Downshifter 11"));
-        observeData.add(new ModelHome(R.drawable.shoes_9, "$30.99", "Nike Alpha"));
+        observeData.add(new ModelHome(R.drawable.shoes_1, 25.99, "React Presto"));
+        observeData.add(new ModelHome(R.drawable.shoes_5, 20.99, "Air Max 97"));
+        observeData.add(new ModelHome(R.drawable.shoes_4, 23.99, "React Presto"));
+        observeData.add(new ModelHome(R.drawable.shoes_3, 23.99, "React Presto"));
+        observeData.add(new ModelHome(R.drawable.shoes_6, 29.99, "Nike Flex"));
+        observeData.add(new ModelHome(R.drawable.shoes_7, 25.99, "Nike Legend"));
+        observeData.add(new ModelHome(R.drawable.shoes_8, 19.99, "Nike Downshifter 11"));
+        observeData.add(new ModelHome(R.drawable.shoes_9, 30.99, "Nike Alpha"));
+        observeData.add(new ModelHome(R.drawable.shoes_10, 23.99, "React Presto"));
+        observeData.add(new ModelHome(R.drawable.shoes_11, 23.99, "React Presto"));
+        observeData.add(new ModelHome(R.drawable.shoes_12, 29.99, "Nike Flex"));
+        observeData.add(new ModelHome(R.drawable.shoes_13, 25.99, "Nike Legend"));
+        observeData.add(new ModelHome(R.drawable.shoes_14, 19.99, "Nike Downshifter 11"));
+        observeData.add(new ModelHome(R.drawable.shoes_15, 30.99, "Nike Alpha"));
     }
 
     public void runViewpager(MyViewPager myViewPager) {

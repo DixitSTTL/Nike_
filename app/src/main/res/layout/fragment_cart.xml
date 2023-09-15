@@ -7,27 +7,28 @@
 
         <variable
             name="mViewmodel"
-            type="com.nike.products.businesslogic.viewmodels.fragment.FragViewModelBookmark" />
+            type="com.nike.products.businesslogic.viewmodels.fragment.FragViewModelCart" />
 
         <variable
             name="generalItemListener"
             type="com.nike.products.businesslogic.interfaces.GeneralItemClickListener" />
+
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:clickable="true"
         app:showSnackBarString="@{mViewmodel.observerSnackBarString}"
-        android:background="@color/white"
-        tools:context=".view.fragment.FragmentBookmark">
+        tools:context=".view.fragment.FragmentCart">
 
-      <androidx.recyclerview.widget.RecyclerView
-          setAdapterBookmark="@{mViewmodel.observeBookmarks}"
-          setOnItemClickListener="@{generalItemListener}"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            setAdapterCart="@{mViewmodel.observeCart}"
+            setOnItemClickListener="@{generalItemListener}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

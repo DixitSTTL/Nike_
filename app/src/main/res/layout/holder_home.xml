@@ -57,7 +57,7 @@
             android:layout_marginTop="3dp"
             android:fontFamily="@font/work_sans"
 
-            android:text="@{model.price}"
+            android:text="@{`$`+String.valueOf(model.price)}"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"

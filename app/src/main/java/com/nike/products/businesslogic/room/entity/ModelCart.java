@@ -1,17 +1,16 @@
 package com.nike.products.businesslogic.room.entity;
 
-import android.graphics.drawable.Drawable;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "bookmarkTable")
-public class ModelHome {
+@Entity(tableName = "cartTable")
+public class ModelCart {
     @PrimaryKey(autoGenerate = true)
     private int id;
     int image;
     Double price;
     String name;
+    int qty;
 
     public int getId() {
         return id;
@@ -21,10 +20,20 @@ public class ModelHome {
         this.id = id;
     }
 
-    public ModelHome(int image, Double price, String name) {
+
+    public ModelCart(int image, Double price, String name, int qty) {
         this.image = image;
         this.price = price;
         this.name = name;
+        this.qty = qty;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public int getImage() {

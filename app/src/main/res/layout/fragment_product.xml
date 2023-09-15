@@ -23,6 +23,8 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:clickable="true"
+
+        app:showSnackBarString="@{mViewmodel.observerSnackBarString}"
         tools:context=".view.fragment.FragmentProduct">
 
         <ImageView
@@ -41,6 +43,7 @@
             setImage="@{model.image}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:elevation="3dp"
             android:layout_marginHorizontal="30dp"
             app:layout_constraintDimensionRatio="5:6"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,6 +137,7 @@
             android:background="@drawable/banner_bg_black"
             android:gravity="center_horizontal"
             android:orientation="vertical"
+            android:onClick="@{(v)->generalClickListener.onClick(v)}"
             android:paddingHorizontal="10dp"
             android:paddingVertical="12dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView5"
@@ -172,7 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/work_sans_semibold"
-            android:text="@{model.price}"
+            android:text="@{`$`+String.valueOf(model.price)}"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
@@ -192,15 +196,16 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <RadioButton
+            android:id="@+id/bookmark_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:button="@null"
             android:background="@drawable/bookmark_selector"
+            android:button="@null"
             android:checked="@{mViewmodel.observeBookmark}"
             android:onClick="@{(v)->generalClickListener.onClick(v)}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/radioGroup4" />
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

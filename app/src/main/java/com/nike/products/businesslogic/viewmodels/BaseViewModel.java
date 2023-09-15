@@ -2,6 +2,7 @@ package com.nike.products.businesslogic.viewmodels;
 
 import android.content.Context;
 
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.nike.products.MyApplication;
@@ -24,7 +25,10 @@ public class BaseViewModel extends ViewModel {
     protected UtilsSharedPreferences preferences;
 
     @Inject
-    protected SchedulerProvider schedulerProvider;
+    protected SchedulerProvider mSchedulers;
+
+    public ObservableField<String> observerSnackBarString = new ObservableField<>("");
+
     @Inject
     public BaseViewModel() {
     }
@@ -36,4 +40,6 @@ public class BaseViewModel extends ViewModel {
 //    public CompositeDisposable getmCompositeDisposable() {
 //        return mCompositeDisposable;
 //    }
+
+
 }

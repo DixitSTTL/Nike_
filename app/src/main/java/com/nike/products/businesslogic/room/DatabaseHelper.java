@@ -13,13 +13,16 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.nike.products.businesslogic.room.dao.BookmarkDao;
+import com.nike.products.businesslogic.room.dao.CartDao;
+import com.nike.products.businesslogic.room.entity.ModelCart;
 import com.nike.products.businesslogic.room.entity.ModelHome;
 
-@Database(entities = {ModelHome.class},version = 1)
+@Database(entities = {ModelHome.class, ModelCart.class},version = 2)
 public abstract class DatabaseHelper extends RoomDatabase {
 
     private static DatabaseHelper instance;
-    public abstract BookmarkDao dao();
+    public abstract BookmarkDao daoBookmark();
+    public abstract CartDao daoCart();
 
 
     public static synchronized DatabaseHelper getInstance(Context context) {
@@ -61,7 +64,7 @@ public abstract class DatabaseHelper extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         PopulateDbAsyncTask(DatabaseHelper instance) {
-            BookmarkDao dao = instance.dao();
+            BookmarkDao dao = instance.daoBookmark();
         }
         @Override
         protected Void doInBackground(Void... voids) {

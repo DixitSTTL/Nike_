@@ -1,5 +1,7 @@
 package com.nike.products.view.activity;
 
+import static androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,6 +29,7 @@ import com.nike.products.databinding.ActivityMainBinding;
 import com.nike.products.businesslogic.room.entity.ModelHome;
 import com.nike.products.view.ActivityBase;
 import com.nike.products.view.fragment.FragmentBookmark;
+import com.nike.products.view.fragment.FragmentCart;
 import com.nike.products.view.fragment.FragmentHome;
 import com.nike.products.view.fragment.FragmentNotification;
 import com.nike.products.view.fragment.FragmentProduct;
@@ -41,6 +44,7 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
     private ActionBarDrawerToggle mDrawerToggle;
 
     FragmentProduct fragmentProduct = new FragmentProduct();
+    FragmentCart fragmentCart = new FragmentCart();
     FragmentHome fragmentHome = new FragmentHome();
     FragmentBookmark fragmentBookmark = new FragmentBookmark();
     FragmentNotification fragmentNotification = new FragmentNotification();
@@ -105,7 +109,6 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
             @Override
             public void onClick(View view) {
                 onBackPressed();
-                Toast.makeText(context, "Back clicked!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -114,26 +117,22 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.HOME) {
-
             navigateToHome();
             return true;
 
         } else if (item.getItemId() == R.id.BOOKMARK) {
             navigateToBookmark();
-
-
             return true;
+
         } else if (item.getItemId() == R.id.NOTIFICATION) {
             navigateToNotification();
-
-
             return true;
+
         } else if (item.getItemId() == R.id.PROFILE) {
             navigateToProfile();
-
             return true;
-        }
 
+        }
 
         return false;
     }
@@ -142,8 +141,14 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
     private void updateDrawerToggle() {
         boolean isMain = true;
         Fragment fragment = getCurrentFragment();
-        if (fragment instanceof FragmentProduct) {
+        if (fragment instanceof FragmentProduct || fragment instanceof FragmentCart) {
             isMain = false;
+        } else {
+            setCheckedBottom(fragment);
+            popBackStack(FragmentProduct.class.getCanonicalName());
+            popBackStack(FragmentCart.class.getCanonicalName());
+
+
         }
 
         Log.d("fragments", "  " + getSupportFragmentManager().getFragments().size());
@@ -160,6 +165,29 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
 
         }
 
+
+    }
+
+    private void popBackStack(String canonicalName) {
+        Fragment fr = getSupportFragmentManager().findFragmentByTag(FragmentProduct.class.getCanonicalName());
+        if (fr != null) {
+            getSupportFragmentManager().beginTransaction().remove(fr).commit();
+        }
+    }
+
+    private void setCheckedBottom(Fragment fragment) {
+        if (fragment == null) {
+            return;
+        }
+        if (fragment instanceof FragmentProfile) {
+            mBinding.bottomNavigationView.getMenu().getItem(3).setChecked(true);
+        } else if (fragment instanceof FragmentBookmark) {
+            mBinding.bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        } else if (fragment instanceof FragmentHome) {
+            mBinding.bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        } else if (fragment instanceof FragmentNotification) {
+            mBinding.bottomNavigationView.getMenu().getItem(2).setChecked(true);
+        }
 
     }
 
@@ -227,7 +255,7 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
     }
 
     private void navigateToBookmark() {
-        addFragment(fragmentBookmark, "", FragmentBookmark.class.getCanonicalName());
+        addFragment(fragmentBookmark, "Bookmarks", FragmentBookmark.class.getCanonicalName());
     }
 
     private void navigateToHome() {
@@ -238,6 +266,11 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
     public void navigateToProduct(ModelHome modelHome) {
         fragmentProduct.setData(modelHome);
         addFragment(fragmentProduct, modelHome.getName(), FragmentProduct.class.getCanonicalName());
+
+    }
+
+    public void navigateToCart() {
+        addFragment(fragmentCart, "Cart", FragmentCart.class.getCanonicalName());
 
     }
 
@@ -261,6 +294,7 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
 
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             super.onBackPressed();
+            updateDrawerToggle();
         } else {
             finish();
         }

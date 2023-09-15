@@ -50,16 +50,8 @@ public class FragmentBookmark extends BaseFragment {
         @Override
         public void onItemClick(View view, int position, Object item) {
 
-            Disposable disposable = DatabaseHelper.getInstance(mContext).dao().deleteTask((ModelHome) item)
-                    .subscribeOn(mSchedulers.io())
-                    .observeOn(mSchedulers.ui())
-                    .subscribe(() -> {
+             mViewmodel.removeFromBookmark((ModelHome) item);
 
-                        Toast.makeText(mContext, "Bookmarked Removed", Toast.LENGTH_SHORT).show();
-
-                    }, throwable -> {
-
-                    });
 
         }
     };

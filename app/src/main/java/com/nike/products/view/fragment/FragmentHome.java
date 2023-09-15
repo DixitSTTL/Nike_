@@ -3,6 +3,7 @@ package com.nike.products.view.fragment;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -47,7 +48,13 @@ public class FragmentHome extends BaseFragment {
         mBinding.setGeneralListener(generalClickListener);
         mBinding.setGeneralItemListener(generalItemClickListener);
 
+
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     GeneralClickListener generalClickListener = view -> {
@@ -69,7 +76,7 @@ public class FragmentHome extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.bagBtn) {
-//            mActivityMain.navigateToAstro(mViewmodel.observerAstro.get(), mViewmodel.observableAllData.get().getCurrent().getAirQuality());
+            mActivityMain.navigateToCart();
             return true;
         }
 

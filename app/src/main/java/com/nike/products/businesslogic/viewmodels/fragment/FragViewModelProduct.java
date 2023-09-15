@@ -1,12 +1,10 @@
 package com.nike.products.businesslogic.viewmodels.fragment;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.databinding.ObservableBoolean;
 
 import com.nike.products.MyApplication;
 import com.nike.products.businesslogic.room.DatabaseHelper;
+import com.nike.products.businesslogic.room.entity.ModelCart;
 import com.nike.products.businesslogic.room.entity.ModelHome;
 import com.nike.products.businesslogic.viewmodels.BaseViewModel;
 
@@ -27,33 +25,29 @@ public class FragViewModelProduct extends BaseViewModel {
     }
 
     public void checkBookmark(ModelHome modelHome) {
-        Log.d("subscribesubscribe","checkBookmark");
 
-       Disposable disposable = DatabaseHelper.getInstance(context).dao().getById(modelHome.getImage())
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
+        Disposable disposable = DatabaseHelper.getInstance(context).daoBookmark().getById(modelHome.getImage())
+                .subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
                 .subscribe(result -> {
-                    Log.d("subscribesubscribe",""+result);
                     if (result != null) {
                         observeBookmark.set(true);
-                    }else {
+                    } else {
                         observeBookmark.set(false);
                     }
 
                 }, throwable -> {
-                    Log.d("subscribesubscribet",""+throwable.toString());
                     observeBookmark.set(false);
 
                 });
     }
 
     public void bookmark(ModelHome modelHome) {
-        Disposable disposable = DatabaseHelper.getInstance(context).dao().insertTask(modelHome).subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
+        Disposable disposable = DatabaseHelper.getInstance(context).daoBookmark().insertTask(modelHome).subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
                     observeBookmark.set(true);
-
-                    Toast.makeText(context, "Bookmarked Successfully", Toast.LENGTH_SHORT).show();
+                    observerSnackBarString.set("Bookmarked Successfully");
 
                 }, throwable -> {
 
@@ -61,11 +55,60 @@ public class FragViewModelProduct extends BaseViewModel {
     }
 
     public void unbookmark(ModelHome modelHome) {
-        Disposable disposable = DatabaseHelper.getInstance(context).dao().deleteById(modelHome.getImage()).subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
+        Disposable disposable = DatabaseHelper.getInstance(context).daoBookmark().deleteById(modelHome.getImage()).subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
                     observeBookmark.set(false);
-                    Toast.makeText(context, "Bookmarked Removed", Toast.LENGTH_SHORT).show();
+                    observerSnackBarString.set("Bookmarked Removed");
+
+                }, throwable -> {
+
+                });
+    }
+
+
+    public void checkInCart(ModelCart modelCart) {
+        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().getById(modelCart.getImage()).subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
+                .subscribe(modelCart1 -> {
+
+                    if (modelCart1 == null) {
+                        addToCart(modelCart);
+                    } else {
+                        addQty(modelCart1);
+                    }
+
+                },throwable -> {
+                    addToCart(modelCart);
+
+                });
+    }
+
+    public void addToCart(ModelCart modelCart) {
+        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().insertCart(modelCart).subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
+                .subscribe(() -> {
+                    observerSnackBarString.set("Added to cart");
+                }, throwable -> {
+
+                });
+    }
+
+    public void addQty(ModelCart item) {
+
+        if (item == null) {
+            return;
+        }
+        int qty = item.getQty();
+        qty++;
+        item.setQty(qty);
+
+
+        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().updateCart(item)
+                .subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
+                .subscribe(() -> {
+                    observerSnackBarString.set("Added to cart");
 
                 }, throwable -> {
 

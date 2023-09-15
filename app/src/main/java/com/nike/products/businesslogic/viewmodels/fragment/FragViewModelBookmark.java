@@ -27,9 +27,9 @@ public class FragViewModelBookmark extends BaseViewModel {
 
     public void loadData(){
 
-     Disposable disposable =  DatabaseHelper.getInstance(myApplication.getApplicationContext()).dao().getAllBookmark()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
+     Disposable disposable =  DatabaseHelper.getInstance(myApplication.getApplicationContext()).daoBookmark().getAllBookmark()
+                .subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
                 .subscribe(modelHomes -> {
 
                     Log.d("modelHomes",""+modelHomes);
@@ -45,5 +45,16 @@ public class FragViewModelBookmark extends BaseViewModel {
     }
 
 
+    public void removeFromBookmark(ModelHome item) {
+        Disposable disposable = DatabaseHelper.getInstance(context).daoBookmark().deleteTask(item)
+                .subscribeOn(mSchedulers.io())
+                .observeOn(mSchedulers.ui())
+                .subscribe(() -> {
 
+                    observerSnackBarString.set("Bookmarked Removed");
+
+                }, throwable -> {
+
+                });
+    }
 }
