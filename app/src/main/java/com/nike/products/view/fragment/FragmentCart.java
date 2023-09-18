@@ -1,30 +1,29 @@
 package com.nike.products.view.fragment;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableList;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.nike.products.R;
-import com.nike.products.businesslogic.interfaces.GeneralClickListener;
 import com.nike.products.businesslogic.interfaces.GeneralItemClickListener;
 import com.nike.products.businesslogic.room.entity.ModelCart;
 import com.nike.products.businesslogic.viewmodels.fragment.FragViewModelCart;
 import com.nike.products.databinding.FragmentCartBinding;
 import com.nike.products.view.BaseFragment;
+import com.nike.products.view.adapter.AdapterCart;
 
 public class FragmentCart extends BaseFragment {
 
-
-    FragmentCartBinding mBinding;
-    FragViewModelCart mViewmodel;
+    private FragmentCartBinding mBinding;
+    private FragViewModelCart mViewmodel;
 
     public FragmentCart() {
         // Required empty public constructor
@@ -45,6 +44,7 @@ public class FragmentCart extends BaseFragment {
         mViewmodel = new ViewModelProvider(mActivityMain).get(FragViewModelCart.class);
         mBinding.setMViewmodel(mViewmodel);
         mBinding.setGeneralItemListener(generalItemClickListener);
+
         return mBinding.getRoot();
     }
 
@@ -58,12 +58,12 @@ public class FragmentCart extends BaseFragment {
         @Override
         public void onItemClick(View view, int position, Object item) {
 
-            if (view.getId() == R.id.addBtn){
-                mViewmodel.addQty((ModelCart)item);
-            }else if (view.getId() == R.id.removeBtn){
-                mViewmodel.removeQty((ModelCart)item);
-            }else if (view.getId() == R.id.deleteBtn){
-                mViewmodel.deleteProduct((ModelCart)item);
+            if (view.getId() == R.id.addBtn) {
+                mViewmodel.addQty((ModelCart) item);
+            } else if (view.getId() == R.id.removeBtn) {
+                mViewmodel.removeQty((ModelCart) item);
+            } else if (view.getId() == R.id.deleteBtn) {
+                mViewmodel.deleteProduct((ModelCart) item);
             }
         }
     };

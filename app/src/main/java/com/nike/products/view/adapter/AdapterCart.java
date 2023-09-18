@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nike.products.R;
 import com.nike.products.businesslogic.interfaces.GeneralItemClickListener;
 import com.nike.products.businesslogic.room.entity.ModelCart;
-import com.nike.products.businesslogic.room.entity.ModelHome;
-import com.nike.products.databinding.HolderBookmarkBinding;
 import com.nike.products.databinding.HolderCartBinding;
 
 import java.util.ArrayList;

@@ -22,13 +22,10 @@ public class BaseFragment extends Fragment {
     protected MyApplication mApplication;
     @Inject
     protected UtilsSharedPreferences preferences;
-
     @Inject
     protected SchedulerProvider mSchedulers;
-    protected ActivityBase mActivity;
+    protected BaseActivity mActivity;
     protected MainActivity mActivityMain;
-    //    @Inject
-//    protected ApiHelper mApiHelper;
     protected Context mContext;
 
 
@@ -36,7 +33,7 @@ public class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mActivity = (ActivityBase) getActivity();
+        mActivity = (BaseActivity) getActivity();
         mActivityMain = (MainActivity) getActivity();
         mContext = BaseFragment.this.getContext();
     }

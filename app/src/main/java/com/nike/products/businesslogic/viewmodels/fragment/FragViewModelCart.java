@@ -1,6 +1,9 @@
 package com.nike.products.businesslogic.viewmodels.fragment;
 
+import android.util.Log;
+
 import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
 
 import com.nike.products.MyApplication;
 import com.nike.products.businesslogic.room.DatabaseHelper;
@@ -28,7 +31,7 @@ public class FragViewModelCart extends BaseViewModel {
 
     public void loadData() {
 
-        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().getAllCartProducts()
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoCart().getAllCartProducts()
                 .subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(modelCarts -> {
@@ -39,7 +42,7 @@ public class FragViewModelCart extends BaseViewModel {
 
                 }, throwable -> {
 
-                });
+                }));
     }
 
 
@@ -53,14 +56,14 @@ public class FragViewModelCart extends BaseViewModel {
         item.setQty(qty);
 
 
-        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().updateCart(item)
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoCart().updateCart(item)
                 .subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
 
                 }, throwable -> {
 
-                });
+                }));
     }
 
     public void removeQty(ModelCart item) {
@@ -70,18 +73,18 @@ public class FragViewModelCart extends BaseViewModel {
         int qty = item.getQty();
         qty--;
         item.setQty(qty);
-        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().updateCart(item)
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoCart().updateCart(item)
                 .subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
 
                 }, throwable -> {
 
-                });
+                }));
     }
 
     public void deleteProduct(ModelCart item) {
-        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().deleteCart(item)
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoCart().deleteCart(item)
                 .subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
@@ -89,7 +92,7 @@ public class FragViewModelCart extends BaseViewModel {
 
                 }, throwable -> {
 
-                });
+                }));
 
     }
 }

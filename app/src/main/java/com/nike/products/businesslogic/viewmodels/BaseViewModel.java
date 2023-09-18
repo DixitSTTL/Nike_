@@ -12,6 +12,7 @@ import com.nike.products.utils.preference.UtilsSharedPreferences;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.disposables.CompositeDisposable;
 
 @HiltViewModel
 public class BaseViewModel extends ViewModel {
@@ -34,12 +35,11 @@ public class BaseViewModel extends ViewModel {
     }
 
 
-//    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
-//
-//
-//    public CompositeDisposable getmCompositeDisposable() {
-//        return mCompositeDisposable;
-//    }
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
+    public CompositeDisposable getmCompositeDisposable() {
+        return mCompositeDisposable;
+    }
 
 
 }

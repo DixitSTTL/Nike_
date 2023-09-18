@@ -11,7 +11,6 @@ import com.nike.products.businesslogic.viewmodels.BaseViewModel;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import io.reactivex.disposables.Disposable;
 
 @HiltViewModel
 public class FragViewModelProduct extends BaseViewModel {
@@ -26,7 +25,7 @@ public class FragViewModelProduct extends BaseViewModel {
 
     public void checkBookmark(ModelHome modelHome) {
 
-        Disposable disposable = DatabaseHelper.getInstance(context).daoBookmark().getById(modelHome.getImage())
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoBookmark().getById(modelHome.getImage())
                 .subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(result -> {
@@ -39,11 +38,11 @@ public class FragViewModelProduct extends BaseViewModel {
                 }, throwable -> {
                     observeBookmark.set(false);
 
-                });
+                }));
     }
 
     public void bookmark(ModelHome modelHome) {
-        Disposable disposable = DatabaseHelper.getInstance(context).daoBookmark().insertTask(modelHome).subscribeOn(mSchedulers.io())
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoBookmark().insertTask(modelHome).subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
                     observeBookmark.set(true);
@@ -51,11 +50,11 @@ public class FragViewModelProduct extends BaseViewModel {
 
                 }, throwable -> {
 
-                });
+                }));
     }
 
     public void unbookmark(ModelHome modelHome) {
-        Disposable disposable = DatabaseHelper.getInstance(context).daoBookmark().deleteById(modelHome.getImage()).subscribeOn(mSchedulers.io())
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoBookmark().deleteById(modelHome.getImage()).subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
                     observeBookmark.set(false);
@@ -63,12 +62,12 @@ public class FragViewModelProduct extends BaseViewModel {
 
                 }, throwable -> {
 
-                });
+                }));
     }
 
 
     public void checkInCart(ModelCart modelCart) {
-        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().getById(modelCart.getImage()).subscribeOn(mSchedulers.io())
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoCart().getById(modelCart.getImage()).subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(modelCart1 -> {
 
@@ -78,20 +77,20 @@ public class FragViewModelProduct extends BaseViewModel {
                         addQty(modelCart1);
                     }
 
-                },throwable -> {
+                }, throwable -> {
                     addToCart(modelCart);
 
-                });
+                }));
     }
 
     public void addToCart(ModelCart modelCart) {
-        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().insertCart(modelCart).subscribeOn(mSchedulers.io())
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoCart().insertCart(modelCart).subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
                     observerSnackBarString.set("Added to cart");
                 }, throwable -> {
 
-                });
+                }));
     }
 
     public void addQty(ModelCart item) {
@@ -104,7 +103,7 @@ public class FragViewModelProduct extends BaseViewModel {
         item.setQty(qty);
 
 
-        Disposable disposable = DatabaseHelper.getInstance(context).daoCart().updateCart(item)
+        getmCompositeDisposable().add(DatabaseHelper.getInstance(context).daoCart().updateCart(item)
                 .subscribeOn(mSchedulers.io())
                 .observeOn(mSchedulers.ui())
                 .subscribe(() -> {
@@ -112,6 +111,6 @@ public class FragViewModelProduct extends BaseViewModel {
 
                 }, throwable -> {
 
-                });
+                }));
     }
 }

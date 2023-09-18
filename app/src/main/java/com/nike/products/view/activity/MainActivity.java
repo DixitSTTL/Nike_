@@ -1,6 +1,13 @@
 package com.nike.products.view.activity;
 
-import static androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked;
+import android.annotation.SuppressLint;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -12,22 +19,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
-import android.os.Bundle;
-import android.text.Html;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nike.products.R;
+import com.nike.products.businesslogic.room.entity.ModelHome;
 import com.nike.products.businesslogic.viewmodels.activity.ViewModelMain;
 import com.nike.products.databinding.ActivityMainBinding;
-import com.nike.products.businesslogic.room.entity.ModelHome;
-import com.nike.products.view.ActivityBase;
+import com.nike.products.view.BaseActivity;
 import com.nike.products.view.fragment.FragmentBookmark;
 import com.nike.products.view.fragment.FragmentCart;
 import com.nike.products.view.fragment.FragmentHome;
@@ -35,7 +32,7 @@ import com.nike.products.view.fragment.FragmentNotification;
 import com.nike.products.view.fragment.FragmentProduct;
 import com.nike.products.view.fragment.FragmentProfile;
 
-public class MainActivity extends ActivityBase implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
 
     ActivityMainBinding mBinding;
@@ -54,14 +51,15 @@ public class MainActivity extends ActivityBase implements BottomNavigationView.O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.installSplashScreen(this);
+
         super.onCreate(savedInstanceState);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            SplashScreen.installSplashScreen(this);
         }
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);

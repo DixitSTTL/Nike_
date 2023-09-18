@@ -2,7 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Nike" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimary">@color/black</item>
+
     </style>
 
     <style name="Theme.Nike" parent="Base.Theme.Nike" />
@@ -10,13 +11,12 @@
 
     <style name="splashTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_main_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_main_logo_round</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">true</item> <!--Transparent StatusBar-->
         <item name="android:windowTranslucentNavigation">true</item> <!--Transparent Navigation-->
         <item name="postSplashScreenTheme">@style/Theme.Nike</item> <!--Transparent Navigation-->
-        <item name="windowSplashScreenAnimationDuration" tools:targetApi="s">5000</item> <!--Transparent Navigation-->
-        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">5000</item> <!--Transparent Navigation-->
+        <item name="windowSplashScreenAnimationDuration" >5000</item> <!--Transparent Navigation-->
     </style>
 
 

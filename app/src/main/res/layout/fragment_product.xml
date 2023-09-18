@@ -16,6 +16,10 @@
         <variable
             name="generalClickListener"
             type="com.nike.products.businesslogic.interfaces.GeneralClickListener" />
+
+        <variable
+            name="mDetector"
+            type="android.view.GestureDetector" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,10 +45,11 @@
         <ImageView
             android:id="@+id/imageView3"
             setImage="@{model.image}"
+            setImageWithGesture="@{mDetector}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:elevation="3dp"
             android:layout_marginHorizontal="30dp"
+            android:elevation="3dp"
             app:layout_constraintDimensionRatio="5:6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:elevation="4dp"
             android:orientation="vertical"
+
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
@@ -136,11 +143,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/banner_bg_black"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
             android:onClick="@{(v)->generalClickListener.onClick(v)}"
+            android:orientation="vertical"
             android:paddingHorizontal="10dp"
             android:paddingVertical="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4">
@@ -151,19 +157,22 @@
                 android:src="@drawable/ic_bag" />
 
             <ImageView
+                android:id="@+id/down1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:src="@drawable/ic_down"
-                app:tint="#54FFFFFF" />
+                app:tint="#ffffff" />
 
             <ImageView
+                android:id="@+id/down2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_down"
-                app:tint="#A8FFFFFF" />
+                app:tint="#ffffff" />
 
             <ImageView
+                android:id="@+id/down3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_down" />
@@ -203,6 +212,7 @@
             android:background="@drawable/bookmark_selector"
             android:button="@null"
             android:checked="@{mViewmodel.observeBookmark}"
+            android:elevation="4dp"
             android:onClick="@{(v)->generalClickListener.onClick(v)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView6" />
