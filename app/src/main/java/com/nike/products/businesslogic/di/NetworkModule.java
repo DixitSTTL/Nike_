@@ -1,9 +1,13 @@
 package com.nike.products.businesslogic.di;
 
 
+import static com.nike.products.utils.StaticData.getBaseURL;
+
 import android.content.Context;
 
 
+import com.nike.products.businesslogic.Network.ApiCallFactory;
+import com.nike.products.businesslogic.Network.ApiHelper;
 import com.nike.products.businesslogic.rx.AppSchedulerProvider;
 import com.nike.products.businesslogic.rx.SchedulerProvider;
 import com.nike.products.utils.preference.UtilsSharedPreferences;
@@ -19,11 +23,11 @@ import dagger.hilt.components.SingletonComponent;
 @InstallIn(SingletonComponent.class)
 public class NetworkModule {
 
-//    @Provides
-//    @Singleton
-//    ApiHelper providesRetrofitInterface() {
-//        return ApiCallFactory.create(getBaseURL());
-//    }
+    @Provides
+    @Singleton
+    ApiHelper providesRetrofitInterface() {
+        return ApiCallFactory.create(getBaseURL());
+    }
 
     @Provides
     SchedulerProvider providesScheduler() {

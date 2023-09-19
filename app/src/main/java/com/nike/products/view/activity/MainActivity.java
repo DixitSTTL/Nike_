@@ -28,7 +28,7 @@ import com.nike.products.view.BaseActivity;
 import com.nike.products.view.fragment.FragmentBookmark;
 import com.nike.products.view.fragment.FragmentCart;
 import com.nike.products.view.fragment.FragmentHome;
-import com.nike.products.view.fragment.FragmentNotification;
+import com.nike.products.view.fragment.FragmentGallery;
 import com.nike.products.view.fragment.FragmentProduct;
 import com.nike.products.view.fragment.FragmentProfile;
 
@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     FragmentCart fragmentCart = new FragmentCart();
     FragmentHome fragmentHome = new FragmentHome();
     FragmentBookmark fragmentBookmark = new FragmentBookmark();
-    FragmentNotification fragmentNotification = new FragmentNotification();
+    FragmentGallery fragmentNotification = new FragmentGallery();
     FragmentProfile fragmentProfile = new FragmentProfile();
 
     private final FragmentManager.OnBackStackChangedListener mBackStackChangedListener = this::updateDrawerToggle;
@@ -183,7 +183,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             mBinding.bottomNavigationView.getMenu().getItem(1).setChecked(true);
         } else if (fragment instanceof FragmentHome) {
             mBinding.bottomNavigationView.getMenu().getItem(0).setChecked(true);
-        } else if (fragment instanceof FragmentNotification) {
+        } else if (fragment instanceof FragmentGallery) {
             mBinding.bottomNavigationView.getMenu().getItem(2).setChecked(true);
         }
 
@@ -249,7 +249,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     private void navigateToNotification() {
-        addFragment(fragmentNotification, "", FragmentNotification.class.getCanonicalName());
+        addFragment(fragmentNotification, "", FragmentGallery.class.getCanonicalName());
     }
 
     private void navigateToBookmark() {

@@ -6,6 +6,7 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.nike.products.MyApplication;
+import com.nike.products.businesslogic.Network.ApiHelper;
 import com.nike.products.businesslogic.rx.SchedulerProvider;
 import com.nike.products.utils.preference.UtilsSharedPreferences;
 
@@ -22,6 +23,11 @@ public class BaseViewModel extends ViewModel {
 
     @Inject
     protected Context context;
+
+    @Inject
+    protected ApiHelper apiHelper;
+
+
     @Inject
     protected UtilsSharedPreferences preferences;
 

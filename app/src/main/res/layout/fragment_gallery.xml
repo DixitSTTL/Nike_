@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.nike.products.utils.EnumVisibility" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="mViewmodel"
+            type="com.nike.products.businesslogic.viewmodels.fragment.FragViewModelGallery" />
+
+        <variable
+            name="generalItemListener"
+            type="com.nike.products.businesslogic.interfaces.GeneralItemClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="@color/black"
+        tools:context=".view.fragment.FragmentGallery">
+
+        <androidx.recyclerview.widget.RecyclerView
+            setAdapterGallery="@{mViewmodel.observeImageList}"
+            setOnItemClickListener="@{generalItemListener}"
+            android:layout_width="match_parent"
+            android:visibility="@{mViewmodel.observerVisibility==EnumVisibility.VISIBLE ? View.VISIBLE : View.GONE}"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{mViewmodel.observerVisibility==EnumVisibility.LOADING ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

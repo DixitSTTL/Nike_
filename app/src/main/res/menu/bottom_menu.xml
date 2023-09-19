@@ -12,9 +12,9 @@
         android:title="Bookmark" />
     <item
         android:id="@+id/NOTIFICATION"
-        android:icon="@drawable/ic_notification"
+        android:icon="@drawable/ic_gallery"
 
-        android:title="Notification" />
+        android:title="Gallery" />
     <item
         android:id="@+id/PROFILE"
         android:icon="@drawable/ic_user"

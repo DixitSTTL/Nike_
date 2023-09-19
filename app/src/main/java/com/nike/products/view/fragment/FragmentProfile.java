@@ -11,8 +11,7 @@ import com.nike.products.view.BaseFragment;
 public class FragmentProfile extends BaseFragment {
 
 
-    public FragmentProfile() {
-        // Required empty public constructor
+    public FragmentProfile() {        // Required empty public constructor
     }
 
     @Override

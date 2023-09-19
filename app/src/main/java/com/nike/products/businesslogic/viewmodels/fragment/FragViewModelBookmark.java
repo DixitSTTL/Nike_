@@ -17,6 +17,7 @@ import io.reactivex.disposables.Disposable;
 @HiltViewModel
 public class FragViewModelBookmark extends BaseViewModel {
 
+
     @Inject
     MyApplication myApplication;
     public ObservableArrayList<ModelHome> observeBookmarks = new ObservableArrayList<>();
