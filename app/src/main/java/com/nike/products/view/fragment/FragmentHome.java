@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.nike.products.R;
 import com.nike.products.businesslogic.interfaces.GeneralClickListener;
 import com.nike.products.businesslogic.interfaces.GeneralItemClickListener;
+import com.nike.products.businesslogic.viewmodels.fragment.FragViewModelGallery;
 import com.nike.products.businesslogic.viewmodels.fragment.FragViewModelHome;
 import com.nike.products.databinding.FragmentHomeBinding;
 import com.nike.products.businesslogic.room.entity.ModelHome;
@@ -42,19 +43,22 @@ public class FragmentHome extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_home, container, false);
+        initView() ;
+
+
+        return mBinding.getRoot();
+    }
+    private void initView() {
         mViewModel = new ViewModelProvider(mActivityMain).get(FragViewModelHome.class);
         mViewModel.loadData();
         mBinding.setMViewmodel(mViewModel);
         mBinding.setGeneralListener(generalClickListener);
         mBinding.setGeneralItemListener(generalItemClickListener);
-
-
-        return mBinding.getRoot();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mBinding.radioGroup.check(R.id.radio_1);
     }
 
     GeneralClickListener generalClickListener = view -> {

@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import io.reactivex.Single;
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 public interface ApiHelper {
 
@@ -24,6 +27,11 @@ public interface ApiHelper {
 
     @GET(ApiEndPoints.API_SEARCH)
     Single<Get_search_pojo> get_search_data(@QueryMap Map<String, String> map, @HeaderMap Map<String,String> map2);
+
+    @Streaming
+    @GET()
+    Single<ResponseBody> download_Image(@Url String url);
+
 
 
 }

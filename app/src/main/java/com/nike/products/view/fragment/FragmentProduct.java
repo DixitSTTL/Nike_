@@ -22,8 +22,10 @@ import com.nike.products.R;
 import com.nike.products.businesslogic.interfaces.GeneralClickListener;
 import com.nike.products.businesslogic.room.entity.ModelCart;
 import com.nike.products.businesslogic.room.entity.ModelHome;
+import com.nike.products.businesslogic.viewmodels.fragment.FragViewModelHome;
 import com.nike.products.businesslogic.viewmodels.fragment.FragViewModelProduct;
 import com.nike.products.databinding.FragmentProductBinding;
+import com.nike.products.utils.Logger;
 import com.nike.products.view.BaseFragment;
 
 public class FragmentProduct extends BaseFragment {
@@ -65,6 +67,7 @@ public class FragmentProduct extends BaseFragment {
         mBinding.setMViewmodel(mViewmodel);
         mBinding.setGeneralClickListener(generalClickListener);
         mBinding.setMDetector(mDetector);
+        mBinding.radioGroup4.check(R.id.radio_1);
     }
 
     private void animateArrows() {
@@ -84,7 +87,7 @@ public class FragmentProduct extends BaseFragment {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            Log.d("TAG", "onDown: ");
+            Logger.e("TAG", "onDown: ");
 
             // don't return false here or else none of the other
             // gestures will work
@@ -124,7 +127,7 @@ public class FragmentProduct extends BaseFragment {
 
             float diffX = e2.getX() - e1.getX();
             float diffY = e2.getY() - e1.getY();
-            Log.d("TAG", "onFling: " + diffY + "   " + velocityY);
+            Logger.e("TAG", "onFling: " + diffY + "   " + velocityY);
 
             if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                 if (diffY > 0) {

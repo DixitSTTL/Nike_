@@ -17,6 +17,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
+
+
     ndkVersion = "23.1.7779620"
 
     externalNativeBuild {
@@ -25,6 +29,34 @@ android {
         }
     }
 
+
+    buildFeatures {
+        buildConfig = true
+    }
+    flavorDimensions ("full")
+    productFlavors {
+
+        create("product")  {
+            dimension ="full"
+            //buildConfigField 'String', 'BASE_URL', '"https://ddindia.co/rest/apiv1/"'
+            buildConfigField( "int", "APP_CONFIG", "1")
+        }
+        create("stage") {
+            dimension= "full"
+            //  buildConfigField 'String', 'BASE_URL', '"http://ddindia.php-staging.com/rest/apiv1/"'
+            buildConfigField("int", "APP_CONFIG", "2")
+            //buildConfigField 'String', 'BASE_URL', '"https://ddindia.co/rest/apiv1/"'
+
+        }
+        create("local") {
+            dimension ="full"
+            buildConfigField( "int", "APP_CONFIG", "3")
+            //   buildConfigField 'String', 'BASE_URL', '"http://ddindia.php-staging.com/rest/apiv1/"'
+        }
+    }
+
+
+
     buildTypes {
         release {
             isDebuggable = false
@@ -32,15 +64,17 @@ android {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             isMinifyEnabled = false
+            applicationIdSuffix=".debug"
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
-    ndkVersion = "23.1.7779620"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

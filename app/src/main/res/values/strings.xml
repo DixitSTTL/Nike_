@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="navigationDrawerOpen">open</string>
     <string name="navigationDrawerClose">close</string>
+    <string name="message_permission_not_granted">Permission not granted</string>
+
 </resources>

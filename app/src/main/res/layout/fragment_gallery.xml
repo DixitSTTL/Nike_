@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
+        app:showSnackBarString="@{mViewmodel.observerSnackBarString}"
         android:background="@color/black"
         tools:context=".view.fragment.FragmentGallery">
 

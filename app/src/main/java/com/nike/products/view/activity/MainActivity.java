@@ -1,5 +1,7 @@
 package com.nike.products.view.activity;
 
+import static com.nike.products.utils.ConstantCodes.REQUEST_WRITE_STORAGE_PERMISSION_DOC;
+
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,11 +26,12 @@ import com.nike.products.R;
 import com.nike.products.businesslogic.room.entity.ModelHome;
 import com.nike.products.businesslogic.viewmodels.activity.ViewModelMain;
 import com.nike.products.databinding.ActivityMainBinding;
+import com.nike.products.utils.Logger;
 import com.nike.products.view.BaseActivity;
 import com.nike.products.view.fragment.FragmentBookmark;
 import com.nike.products.view.fragment.FragmentCart;
-import com.nike.products.view.fragment.FragmentHome;
 import com.nike.products.view.fragment.FragmentGallery;
+import com.nike.products.view.fragment.FragmentHome;
 import com.nike.products.view.fragment.FragmentProduct;
 import com.nike.products.view.fragment.FragmentProfile;
 
@@ -44,7 +47,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     FragmentCart fragmentCart = new FragmentCart();
     FragmentHome fragmentHome = new FragmentHome();
     FragmentBookmark fragmentBookmark = new FragmentBookmark();
-    FragmentGallery fragmentNotification = new FragmentGallery();
+    FragmentGallery fragmentGallery = new FragmentGallery();
     FragmentProfile fragmentProfile = new FragmentProfile();
 
     private final FragmentManager.OnBackStackChangedListener mBackStackChangedListener = this::updateDrawerToggle;
@@ -149,7 +152,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         }
 
-        Log.d("fragments", "  " + getSupportFragmentManager().getFragments().size());
+        Logger.e("fragments", "  " + getSupportFragmentManager().getFragments().size());
         actionBar.setDisplayHomeAsUpEnabled(!isMain);
         actionBar.setDisplayShowHomeEnabled(isMain);
         actionBar.setDisplayShowTitleEnabled(!isMain);
@@ -198,7 +201,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         } else {
             transaction.show(fragment);
-
         }
         manageFragments(fragment);
 
@@ -249,7 +251,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     private void navigateToNotification() {
-        addFragment(fragmentNotification, "", FragmentGallery.class.getCanonicalName());
+        addFragment(fragmentGallery, "", FragmentGallery.class.getCanonicalName());
     }
 
     private void navigateToBookmark() {
@@ -296,6 +298,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+        if (requestCode == REQUEST_WRITE_STORAGE_PERMISSION_DOC) {
+            fragmentGallery.checkPermission();
+
+        }
+
     }
 
 

@@ -11,14 +11,20 @@
 
     <style name="splashTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_main_logo_round</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_main_logo</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">true</item> <!--Transparent StatusBar-->
         <item name="android:windowTranslucentNavigation">true</item> <!--Transparent Navigation-->
         <item name="postSplashScreenTheme">@style/Theme.Nike</item> <!--Transparent Navigation-->
-        <item name="windowSplashScreenAnimationDuration" >5000</item> <!--Transparent Navigation-->
+        <item name="windowSplashScreenAnimationDuration" >1000</item> <!--Transparent Navigation-->
     </style>
-
+    <style name="DialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 
     <style name="CustomToolbarTextAppearance">
         <item name="android:fontFamily">@font/work_sans_bold</item>

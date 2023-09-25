@@ -1,7 +1,6 @@
 package com.nike.products.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableList;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.nike.products.R;
@@ -18,7 +16,6 @@ import com.nike.products.businesslogic.room.entity.ModelCart;
 import com.nike.products.businesslogic.viewmodels.fragment.FragViewModelCart;
 import com.nike.products.databinding.FragmentCartBinding;
 import com.nike.products.view.BaseFragment;
-import com.nike.products.view.adapter.AdapterCart;
 
 public class FragmentCart extends BaseFragment {
 
@@ -41,11 +38,15 @@ public class FragmentCart extends BaseFragment {
                              Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_cart, container, false);
+        initView();
+
+        return mBinding.getRoot();
+    }
+
+    private void initView() {
         mViewmodel = new ViewModelProvider(mActivityMain).get(FragViewModelCart.class);
         mBinding.setMViewmodel(mViewmodel);
         mBinding.setGeneralItemListener(generalItemClickListener);
-
-        return mBinding.getRoot();
     }
 
     @Override

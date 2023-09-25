@@ -26,8 +26,9 @@
         <ImageView
             setGlideImage="@{model.large2x}"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
+            android:src="@drawable/ic_nike_logo_white"
             android:layout_marginVertical="3dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -35,6 +36,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:src="@drawable/ic_download"
+            android:layout_margin="5dp"
+            android:onClick="@{(v)->generalItemClickListener.onItemClick(v,currentPosition,model)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

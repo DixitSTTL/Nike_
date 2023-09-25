@@ -8,6 +8,7 @@ import com.nike.products.MyApplication;
 import com.nike.products.businesslogic.room.DatabaseHelper;
 import com.nike.products.businesslogic.viewmodels.BaseViewModel;
 import com.nike.products.businesslogic.room.entity.ModelHome;
+import com.nike.products.utils.Logger;
 
 import javax.inject.Inject;
 
@@ -34,7 +35,7 @@ public class FragViewModelBookmark extends BaseViewModel {
                 .observeOn(mSchedulers.ui())
                 .subscribe(modelHomes -> {
 
-                    Log.d("modelHomes", "" + modelHomes);
+                    Logger.e("modelHomes", "" + modelHomes);
 
                     if (modelHomes != null) {
                         observeBookmarks.clear();

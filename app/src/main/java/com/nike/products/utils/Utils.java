@@ -14,8 +14,8 @@ public class Utils {
 
             snackbar = Snackbar.make(viewLayout, toastMessage, Snackbar.LENGTH_LONG);
 //            snackbar.getView().setBackgroundColor(R.color.white);
-            snackbar.setBackgroundTint(ContextCompat.getColor(viewLayout.getContext(), R.color.white));
-            snackbar.setTextColor(ContextCompat.getColor(viewLayout.getContext(), R.color.black));
+            snackbar.setBackgroundTint(ContextCompat.getColor(viewLayout.getContext(), R.color.black));
+            snackbar.setTextColor(ContextCompat.getColor(viewLayout.getContext(), R.color.white));
 
             snackbar.show();
         } catch (Exception exception) {

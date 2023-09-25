@@ -37,4 +37,5 @@ public class BaseFragment extends Fragment {
         mActivityMain = (MainActivity) getActivity();
         mContext = BaseFragment.this.getContext();
     }
+
 }
